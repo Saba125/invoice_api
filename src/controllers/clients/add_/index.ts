@@ -26,5 +26,12 @@ export default async function add_client(req: Request, res: Response) {
     address: body.address,
     user_id: user.id,
     city_id: body.city_id,
+    currency_id: body.currency_id,
+  })
+  if (dbRes.error) {
+    return Utils.sendError(res, dbRes.error.message)
+  }
+  Utils.sendSuccess(res, {
+    client: dbRes,
   })
 }

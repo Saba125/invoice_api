@@ -5,6 +5,7 @@ const addClientSchema = Joi.object({
   phone: Joi.string().required(),
   company: Joi.string().required(),
   address: Joi.string().required(),
-  city_id: Joi.string().required(),
+  city_id: Joi.number().required(),
+  currency_id: Joi.number().required(),
 })
 export default addClientSchema

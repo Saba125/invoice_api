@@ -2,11 +2,11 @@ import express from "express"
 import usersController from "../controllers/auth/export"
 import authMiddleware from "../middlewares/auth"
 
-import upload from "../config/multer"
 import roleMiddleware from "../middlewares/permission"
 import cityController from "../controllers/city/export"
 import stateController from "../controllers/states/export"
 import currenciesController from "../controllers/currencies/export"
+import clientsController from "../controllers/clients/export"
 
 export enum Roles {
   Admin = "admin",
@@ -19,6 +19,8 @@ Router.post("/auth/register", usersController.register)
 Router.post("/auth/login", usersController.login)
 Router.post("/auth/verifyEmail", usersController.verifyEmail)
 Router.get("/auth/aboutMe", authMiddleware, usersController.aboutMe)
+// clients
+Router.post("/clients", authMiddleware, clientsController.add_client)
 // city
 Router.post(
   "/city/add",
@@ -74,6 +76,12 @@ Router.delete(
   authMiddleware,
   roleMiddleware(Roles.Admin),
   currenciesController.delete_currency
+)
+Router.get("/currency", authMiddleware, currenciesController.get_currencies)
+Router.get(
+  "/currency/:id",
+  authMiddleware,
+  currenciesController.get_single_currency
 )
 
 export default Router
