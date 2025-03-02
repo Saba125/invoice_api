@@ -69,5 +69,11 @@ Router.put(
   roleMiddleware(Roles.Admin),
   currenciesController.edit_currency
 )
+Router.delete(
+  "/currency/:id",
+  authMiddleware,
+  roleMiddleware(Roles.Admin),
+  currenciesController.delete_currency
+)
 
 export default Router
