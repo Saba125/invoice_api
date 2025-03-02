@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    title Order Confirmation - #{data.orderNumber}
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        padding: 20px;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .order-details {
+        margin-top: 20px;
+      }
+      .order-details th, .order-details td {
+        padding: 8px;
+        text-align: left;
+      }
+      .order-details th {
+        background-color: #f2f2f2;
+      }
+      .total-amount {
+        font-weight: bold;
+        text-align: right;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 12px;
+        color: #777;
+      }
+
+  body
+    .container
+      .header
+        h1 Order Confirmation
+        p Thank you for your purchase! Your order is being processed.
+
+      h3 Order Number: #{data.orderNumber}
+      p Dear #{data.customerEmail}, thank you for ordering from our store.
+
+      .order-details
+        table
+          thead
+            tr
+              th Product
+              th Quantity
+              th Price
+          tbody
+            each item in data.orderItems
+              tr
+                td #{item.name}
+                td #{item.quantity}
+                td $#{(parseFloat(item.price)).toFixed(2)}
+
+          tfoot
+            tr
+              td(colspan="2") Total
+              td $#{(data.orderItems.reduce((acc, item) => acc + parseFloat(item.price), 0)).toFixed(2)}
+
+      .footer
+        p If you have any questions, please contact us at support@yourstore.com
+        p &copy; 2025 YourStore. All rights reserved.
