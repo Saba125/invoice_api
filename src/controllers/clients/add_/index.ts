@@ -32,6 +32,6 @@ export default async function add_client(req: Request, res: Response) {
     return Utils.sendError(res, dbRes.error.message)
   }
   Utils.sendSuccess(res, {
-    client: dbRes,
+    client: dbRes.data,
   })
 }

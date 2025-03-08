@@ -29,3 +29,16 @@ export const send_order_confirmation_email = async (
 
   return sendTestEmail({ to, subject, text, html: sendHtml })
 }
+export const send_invoice = async (
+  to: string,
+  data: any,
+  subject?: string,
+  text?: string
+) => {
+  const { text: textData } = data
+  console.log(textData)
+  const compiledTemplate = pug.compileFile(join(templatesPath, "invoice.pug"))
+  const sendHtml = compiledTemplate({ textData })
+
+  return sendTestEmail({ to, subject, text, html: sendHtml })
+}

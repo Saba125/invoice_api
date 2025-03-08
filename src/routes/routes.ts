@@ -7,6 +7,8 @@ import cityController from "../controllers/city/export"
 import stateController from "../controllers/states/export"
 import currenciesController from "../controllers/currencies/export"
 import clientsController from "../controllers/clients/export"
+import invoicesController from "../controllers/invoices/export"
+import invSettingsController from "../controllers/invoice_settings/export"
 
 export enum Roles {
   Admin = "admin",
@@ -20,7 +22,27 @@ Router.post("/auth/login", usersController.login)
 Router.post("/auth/verifyEmail", usersController.verifyEmail)
 Router.get("/auth/aboutMe", authMiddleware, usersController.aboutMe)
 // clients
-Router.post("/clients", authMiddleware, clientsController.add_client)
+Router.post(
+  "/clients/add",
+  authMiddleware,
+  roleMiddleware(Roles.Admin),
+  clientsController.add_client
+)
+Router.put(
+  "/clients/:id",
+  authMiddleware,
+  roleMiddleware(Roles.Admin),
+  clientsController.edit_client
+)
+Router.delete(
+  "/clients/:id",
+  authMiddleware,
+  roleMiddleware(Roles.Admin),
+  clientsController.delete_client
+)
+Router.post("/clients", authMiddleware, clientsController.get_clients)
+Router.get("/clients/:id", authMiddleware, clientsController.get_single_client)
+
 // city
 Router.post(
   "/city/add",
@@ -83,5 +105,17 @@ Router.get(
   authMiddleware,
   currenciesController.get_single_currency
 )
-
+// invoices
+Router.post("/invoices/add", authMiddleware, invoicesController.add_invoice)
+// invoice settings
+Router.post(
+  "/invoiceSettings",
+  authMiddleware,
+  invSettingsController.add_invoice_settings
+)
+Router.put(
+  "/invoiceSettings/:id",
+  authMiddleware,
+  invSettingsController.edit_invoice_settings
+)
 export default Router

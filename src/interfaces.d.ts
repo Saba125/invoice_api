@@ -21,6 +21,9 @@ export type ITables =
   | "city"
   | "currencies"
   | "currency_value"
+  | "invoices"
+  | "invoice_items"
+  | "invoice_settings"
 export interface IDbTools {
   connection: PoolConnection | undefined
   release: () => void
@@ -56,4 +59,33 @@ export interface IUser {
   email: string
   password: string
   role: "admin" | "client"
+}
+export interface InvoiceItems {
+  id: number
+  invoice_id: number
+  name: string
+  description: string
+  quantity: number
+  unit_price: number
+  total_price: number
+}
+export interface IClient {
+  name: string
+  email: string
+  company: string
+  phone: string
+  address: string
+  user_id: number
+  city_id: number
+  currency_id: number
+}
+export interface IInvSettings {
+  user_id: number
+  inv_prefix: string
+  inv_suffix: string
+  inv_number_length: number
+  upper_case: boolean
+  lower_case: boolean
+  is_number: boolean
+  start_inv_number: number
 }

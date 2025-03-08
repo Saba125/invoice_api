@@ -10,7 +10,7 @@ import path from "path"
 import { Client } from "pg"
 import authMiddleware from "./middlewares/auth"
 import adminMiddleware from "./middlewares/permission"
-import { connectDB } from "./db/db_connection"
+import { connectDB } from "./controllers/invoices/db_connection"
 // Load environment variables from .env file
 import DbTools from "./db/db_tools"
 const app = express()
