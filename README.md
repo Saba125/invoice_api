@@ -7,7 +7,6 @@ A backend service for managing invoices, clients, currencies, roles, and more, b
 - Express.js
 - TypeScript
 - PostgreSQL
-- Sequelize (ORM)
 - JWT Authentication
 - Bcrypt (Password Hashing)
 
