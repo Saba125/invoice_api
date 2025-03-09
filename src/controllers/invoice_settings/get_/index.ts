@@ -17,4 +17,5 @@ export default async function get_invoice_settings(
       message: "Invoice settings not found",
     })
   }
+  Utils.sendSuccess(res, dbRes)
 }

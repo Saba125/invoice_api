@@ -35,10 +35,25 @@ export const send_invoice = async (
   subject?: string,
   text?: string
 ) => {
-  const { text: textData } = data
-  console.log(textData)
+  const {
+    invoice_number,
+    company,
+    create_date,
+    due_date,
+    items,
+    total_price,
+    note,
+  } = data
   const compiledTemplate = pug.compileFile(join(templatesPath, "invoice.pug"))
-  const sendHtml = compiledTemplate({ textData })
+  const sendHtml = compiledTemplate({
+    invoice_number,
+    company,
+    create_date,
+    due_date,
+    items,
+    total_price,
+    note,
+  })
 
   return sendTestEmail({ to, subject, text, html: sendHtml })
 }

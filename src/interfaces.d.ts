@@ -69,7 +69,20 @@ export interface InvoiceItems {
   unit_price: number
   total_price: number
 }
+export interface IInvoice {
+  id: number
+  user_id: number
+  client_id: number
+  total_amount: number
+  currency_id: number
+  status: "paid" | "overdue" | "pending"
+  due_date: Date
+  created_at: Date
+  note: string
+  invoice_number: string
+}
 export interface IClient {
+  id: number
   name: string
   email: string
   company: string
@@ -78,6 +91,7 @@ export interface IClient {
   user_id: number
   city_id: number
   currency_id: number
+  ballance: number
 }
 export interface IInvSettings {
   user_id: number

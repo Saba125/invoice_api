@@ -107,6 +107,19 @@ Router.get(
 )
 // invoices
 Router.post("/invoices/add", authMiddleware, invoicesController.add_invoice)
+Router.put(
+  "/invoices/edit/:id",
+  authMiddleware,
+  invoicesController.edit_invoice
+)
+Router.get("/invoices", authMiddleware, invoicesController.get_invoices)
+Router.post("/invoices/pay", authMiddleware, invoicesController.pay_invoice)
+Router.post(
+  "/invoices/preview",
+  authMiddleware,
+  invoicesController.preview_invoice
+)
+
 // invoice settings
 Router.post(
   "/invoiceSettings",
@@ -117,5 +130,10 @@ Router.put(
   "/invoiceSettings/:id",
   authMiddleware,
   invSettingsController.edit_invoice_settings
+)
+Router.get(
+  "/invoiceSettings",
+  authMiddleware,
+  invSettingsController.get_invoice_settings
 )
 export default Router

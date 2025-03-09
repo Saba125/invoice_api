@@ -13,6 +13,7 @@ import adminMiddleware from "./middlewares/permission"
 import { connectDB } from "./controllers/invoices/db_connection"
 // Load environment variables from .env file
 import DbTools from "./db/db_tools"
+import generate_inv_number from "./utils/generate_inv_number"
 const app = express()
 dotenv.config()
 const corsOptions = {
@@ -36,12 +37,15 @@ app.use(
 // Serve static files
 app.use("/images", express.static(path.join(__dirname, "../../public/images")))
 app.use("/videos", express.static(path.join(__dirname, "../../public/videos")))
+app.set("view engine", "pug")
+app.set("views", path.join(__dirname, "mail/templates")) // Ensure your Pug templates are inside a "views" folder
 
 // Routes
 
 app.use("/api/v1", router)
 const PORT = process.env.PORT || 3000
-
+const test = generate_inv_number(9, "INV-")
+console.log(test)
 // Run app
 
 app.listen(PORT, async () => {

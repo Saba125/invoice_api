@@ -51,11 +51,20 @@ function createToken(user: any) {
   })
 }
 
+function sendHTML(res: Response, data: any, status: number = 200) {
+  if (res.app.locals.db) {
+    res.app.locals.db.commit()
+    res.app.locals.db.release()
+  }
+  res.status(status).send(data)
+}
+
 const Utils = {
   getCryptoHash,
   createToken,
   sendSuccess,
   sendError,
   validateSchema,
+  sendHTML,
 }
 export default Utils

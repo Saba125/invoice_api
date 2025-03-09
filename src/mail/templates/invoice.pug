@@ -64,7 +64,7 @@ html
                               td(height="20")
                             tr
                               td(style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;")
-                                | Hello, Philip Brooks.
+                                | Hello, #{company}.
                                 br
                                 | Thank you for shopping from our store and for your order.
                         table.col(width="220", border="0", cellpadding="0", cellspacing="0", align="right")
@@ -83,10 +83,11 @@ html
                               td(height="20")
                             tr
                               td(style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;")
-                                small ORDER
-                                |  #800000025
+                                | Invoice number: #{invoice_number}
                                 br
-                                small MARCH 4TH 2016
+                                | Create date: #{create_date}
+                                br
+                                | Due date: #{due_date}
 
     // Order Details
     table.fullTable(width="100%", border="0", cellpadding="0", cellspacing="0", align="center", bgcolor="#e1e1e1")
@@ -107,40 +108,30 @@ html
                         tr
                           th(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;", width="52%", align="left")
                             | Item
-                          th(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;", align="left")
-                            small SKU
+                          th(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;", width="52%", align="left")
+                            | Description
                           th(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;", align="center")
                             | Quantity
                           th(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;", align="right")
-                            | Subtotal
+                            | Unit Price
                         tr
                           td(height="1", style="background: #bebebe;", colspan="4")
                         tr
                           td(height="10", colspan="4")
-                        tr
-                          td.article(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;")
-                            | Beats Studio Over-Ear Headphones
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;")
-                            small MH792AM/A
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="center")
-                            | 1
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="right")
-                            | $299.95
-                        tr
-                          td(height="1", colspan="4", style="border-bottom:1px solid #e4e4e4")
-                        tr
-                          td.article(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;")
-                            | Beats RemoteTalk Cable
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;")
-                            small MHDV2G/A
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="center")
-                            | 1
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="right")
-                            | $29.95
-                        tr
-                          td(height="1", colspan="4", style="border-bottom:1px solid #e4e4e4")
-                tr
-                  td(height="20")
+                        each item in items
+                          tr
+                            td.article(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;")
+                              | #{item.name}
+                       
+                            td.article(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #ff0000;  line-height: 18px;  vertical-align: top; padding:10px 0;")
+                              | #{item.description}
+                       
+                            td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="center")
+                              | #{item.quantity}
+                            td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33;  line-height: 18px;  vertical-align: top; padding:10px 0;", align="right")
+                              | $#{item.unit_price}
+                          tr
+                            td(height="1", colspan="4", style="border-bottom:1px solid #e4e4e4")
 
     // Total
     table.fullTable(width="100%", border="0", cellpadding="0", cellspacing="0", align="center", bgcolor="#e1e1e1")
@@ -158,124 +149,11 @@ html
                           td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ")
                             | Subtotal
                           td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; white-space:nowrap;", width="80")
-                            | $329.90
-                        tr
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ")
-                            | Shipping &amp; Handling
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e; line-height: 22px; vertical-align: top; text-align:right; ")
-                            | $15.00
-                        tr
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ")
-                            strong Grand Total (Incl.Tax)
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #000; line-height: 22px; vertical-align: top; text-align:right; ")
-                            strong $344.90
-                        tr
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; ")
-                            small TAX
-                          td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #b0b0b0; line-height: 22px; vertical-align: top; text-align:right; ")
-                            small $72.40
+                            | $#{total_price}
+                      
 
     // Information
-    table.fullTable(width="100%", border="0", cellpadding="0", cellspacing="0", align="center", bgcolor="#e1e1e1")
-      tbody
-        tr
-          td
-            table.fullTable(width="600", border="0", cellpadding="0", cellspacing="0", align="center", bgcolor="#ffffff")
-              tbody
-                tr
-                tr.hiddenMobile
-                  td(height="60")
-                tr.visibleMobile
-                  td(height="40")
-                tr
-                  td
-                    table.fullPadding(width="480", border="0", cellpadding="0", cellspacing="0", align="center")
-                      tbody
-                        tr
-                          td
-                            table.col(width="220", border="0", cellpadding="0", cellspacing="0", align="left")
-                              tbody
-                                tr
-                                  td(style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ")
-                                    strong BILLING INFORMATION
-                                tr
-                                  td(width="100%", height="10")
-                                tr
-                                  td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ")
-                                    | Philip Brooks
-                                    br
-                                    | Public Wales, Somewhere
-                                    br
-                                    | New York NY
-                                    br
-                                    | 4468, United States
-                                    br
-                                    | T: 202-555-0133
-                            table.col(width="220", border="0", cellpadding="0", cellspacing="0", align="right")
-                              tbody
-                                tr.visibleMobile
-                                  td(height="20")
-                                tr
-                                  td(style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ")
-                                    strong PAYMENT METHOD
-                                tr
-                                  td(width="100%", height="10")
-                                tr
-                                  td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ")
-                                    | Credit Card
-                                    br
-                                    | Credit Card Type: Visa
-                                    br
-                                    | Worldpay Transaction ID: 
-                                    a(href="#", style="color: #ff0000; text-decoration:underline;") 4185939336
-                                    br
-                                    a(href="#", style="color:#b0b0b0;") Right of Withdrawal
-                tr
-                  td
-                    table.fullPadding(width="480", border="0", cellpadding="0", cellspacing="0", align="center")
-                      tbody
-                        tr
-                          td
-                            table.col(width="220", border="0", cellpadding="0", cellspacing="0", align="left")
-                              tbody
-                                tr.hiddenMobile
-                                  td(height="35")
-                                tr.visibleMobile
-                                  td(height="20")
-                                tr
-                                  td(style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ")
-                                    strong SHIPPING INFORMATION
-                                tr
-                                  td(width="100%", height="10")
-                                tr
-                                  td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ")
-                                    | Sup Inc
-                                    br
-                                    | Another Place, Somewhere
-                                    br
-                                    | New York NY
-                                    br
-                                    | 4468, United States
-                                    br
-                                    | T: 202-555-0171
-                            table.col(width="220", border="0", cellpadding="0", cellspacing="0", align="right")
-                              tbody
-                                tr.hiddenMobile
-                                  td(height="35")
-                                tr.visibleMobile
-                                  td(height="20")
-                                tr
-                                  td(style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ")
-                                    strong SHIPPING METHOD
-                                tr
-                                  td(width="100%", height="10")
-                                tr
-                                  td(style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ")
-                                    | UPS: U.S. Shipping Services
-                tr.hiddenMobile
-                  td(height="60")
-                tr.visibleMobile
-                  td(height="30")
+
 
     table.fullTable(width="100%", border="0", cellpadding="0", cellspacing="0", align="center", bgcolor="#e1e1e1")
       tr
@@ -285,6 +163,9 @@ html
               td
                 table.fullPadding(width="480", border="0", cellpadding="0", cellspacing="0", align="center")
                   tbody
+                    tr
+                    td(style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;")
+                        | Note: #{note}               
                     tr
                       td(style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: left;")
                         | Have a nice day.
